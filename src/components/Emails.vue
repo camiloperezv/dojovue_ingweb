@@ -1,12 +1,13 @@
 <template lang="html">
   <div class="row" style="text-align: left">
     <div class="col-md-4">
-      <!-- Agregar buscador -->
-
-      <!-- Agregar buscador -->
+      <div class="bar">
+        <input type="text" v-model="buscador" placeholder="Buscar Email" />
+      </div>
     </div>
     <div class="col-md-12">
       <div class="">
+        
         <table class="table table-striped table-bordered ">
           <thead>
             <tr>
@@ -18,12 +19,12 @@
           </thead>
 
           <tbody>
-            <tr class="filaEmail" v-for="email in lista"  v-bind:class="{seleccionado: email == emailSeleccionado}">
+            <tr class="filaEmail" v-for="email in filteredEmails"  v-bind:class="{seleccionado: email == emailSeleccionado}">
               <td v-on:click="seleccionarEmail(email)">{{email.from}}</td>
               <td v-on:click="seleccionarEmail(email)">{{email.to}}</td>
               <td v-on:click="seleccionarEmail(email)">{{email.asunto}}</td>
               <td v-on:click="toggleFavorite(email)" align="center" v-bind:class="{favorito: email.favorite}"><i class="fa fa-star" aria-hidden="true"></i></td>
-              <td v-on:click="eliminar(email)" align="center" v-bind:class="{favorito: email.favorite}"><i class="fa fa-times" aria-hidden="true"></i></td>
+              <td v-on:click="eliminar(email)" align="center" class="eliminar"><i class="fa fa-times" aria-hidden="true"></i></td>
             </tr>
           </tbody>
         </table>
@@ -76,7 +77,23 @@ export default {
 
 
   computed: {
+    filteredEmails() {
+        var emails = this.lista;
+        var buscador = this.buscador;
+        console.log("buscador",buscador)
+        if(!buscador){
+            return emails;
+        }
 
+        buscador = buscador.trim().toLowerCase();
+
+        emails = emails.filter(function(item){
+            if(item.asunto.toLowerCase().indexOf(buscador) !== -1){
+                return item;
+            }
+        })
+        return emails;
+    }
   }
 
 
