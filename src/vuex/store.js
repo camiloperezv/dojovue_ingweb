@@ -34,7 +34,7 @@ const getters = {
   },
 
   sent: state => {
-    return state.emails.filter(email => email.carpeta == 'Send')
+    return state.emails.filter(email => email.carpeta == 'Sent')
   }
 }
 

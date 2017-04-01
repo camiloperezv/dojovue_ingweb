@@ -7,6 +7,7 @@
           <ul class="nav nav-tabs" >
             <router-link to="/" active-class="active" tag="li" exact><a href="#">Inbox</a></router-link>
             <router-link to="/archive" active-class="active"  tag="li"><a href="#">Favorite</a></router-link>
+            <router-link to="/sent" active-class="active"  tag="li"><a href="#">Sent</a></router-link>
           </ul>
           <router-view></router-view>
           <editor></editor>
